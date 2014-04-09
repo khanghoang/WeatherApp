@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>TKWeatherApp Background Fetch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>TKWeatherApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

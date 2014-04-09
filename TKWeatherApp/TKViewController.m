@@ -23,6 +23,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onHaveNewDataFromBackgroundFetch:) name:@"NewWeather"
+                                               object:nil];
+
+    // this is prevent double time refresh
+    BOOL active = [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive;
+    if (!active)
+        return;
+
     [TKWeatherManager getWeatherWithSuccess:^(NSNumber *temp, NSTimeInterval updateTime) {
 
         NSLog(@"Temp = %@", [temp stringValue]);
@@ -37,6 +46,21 @@
     } andFailure:^(NSError *error) {
 
     }];
+}
+
+- (void)onHaveNewDataFromBackgroundFetch:(NSNotification *)notification {
+    NSDictionary *dictInfo = [notification object];
+
+    NSNumber *temp = dictInfo[@"temp"];
+    NSTimeInterval updateTime = [dictInfo[@"time"] longValue];
+
+    self.lblTemp.text = [temp stringValue];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm:ss"];
+    NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:updateTime];
+
+    self.lblUpdateTime.text = [dateFormatter stringFromDate:lastUpdateDate];
 }
 
 @end

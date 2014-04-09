@@ -221,6 +221,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Triệu Khang";
 				TargetAttributes = {
+					B41C418518F5BA98009BD450 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					B41C41A618F5BA98009BD450 = {
 						TestTargetID = B41C418518F5BA98009BD450;
 					};
