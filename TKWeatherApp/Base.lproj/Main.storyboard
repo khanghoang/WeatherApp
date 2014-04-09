@@ -23,6 +23,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwO-1C-yb1">
+                                <rect key="frame" x="32" y="298" width="257" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -32,6 +39,10 @@
                             <constraint firstItem="eYd-VH-4VK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="203" id="we1-zW-tL5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lblTemp" destination="eYd-VH-4VK" id="zr9-NL-yJH"/>
+                        <outlet property="lblUpdateTime" destination="OwO-1C-yb1" id="v06-a8-Kti"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

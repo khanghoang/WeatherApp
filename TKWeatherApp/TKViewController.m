@@ -7,8 +7,12 @@
 //
 
 #import "TKViewController.h"
+#import "TKWeatherManager.h"
 
 @interface TKViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *lblTemp;
+@property (weak, nonatomic) IBOutlet UILabel *lblUpdateTime;
 
 @end
 
@@ -18,12 +22,21 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [TKWeatherManager getWeatherWithSuccess:^(NSNumber *temp, NSTimeInterval updateTime) {
+
+        NSLog(@"Temp = %@", [temp stringValue]);
+        self.lblTemp.text = [temp stringValue];
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm:ss"];
+        NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:updateTime];
+
+        self.lblUpdateTime.text = [dateFormatter stringFromDate:lastUpdateDate];
+
+    } andFailure:^(NSError *error) {
+
+    }];
 }
 
 @end
