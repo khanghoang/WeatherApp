@@ -34,23 +34,16 @@
 
     [TKWeatherManager getWeatherWithSuccess:^(NSNumber *temp, NSTimeInterval updateTime) {
 
-        NSLog(@"Temp = %@", [temp stringValue]);
-        self.lblTemp.text = [temp stringValue];
-
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm:ss"];
-        NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:updateTime];
-
-        self.lblUpdateTime.text = [dateFormatter stringFromDate:lastUpdateDate];
+        NSDictionary *dict = @{@"temp": temp,
+                               @"time": @(updateTime)};
+        [self updateLabels:dict];
 
     } andFailure:^(NSError *error) {
 
     }];
 }
 
-- (void)onHaveNewDataFromBackgroundFetch:(NSNotification *)notification {
-    NSDictionary *dictInfo = [notification object];
-
+- (void)updateLabels:(NSDictionary *)dictInfo {
     NSNumber *temp = dictInfo[@"temp"];
     NSTimeInterval updateTime = [dictInfo[@"time"] longValue];
 
@@ -61,6 +54,11 @@
     NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:updateTime];
 
     self.lblUpdateTime.text = [dateFormatter stringFromDate:lastUpdateDate];
+}
+
+- (void)onHaveNewDataFromBackgroundFetch:(NSNotification *)notification {
+    NSDictionary *dictInfo = [notification object];
+    [self updateLabels:dictInfo];
 }
 
 @end
